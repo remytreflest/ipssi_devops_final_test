@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: final-test-namespace
+  labels:
+    name: final-test-namespace
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: final-test-deployment
+  namespace: final-test-namespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: final-test
+  template:
+    metadata:
+      labels:
+        app: final-test
+    spec:
+      containers:
+        - name: final-test-container
+          image: remytreflest/ipssi_devops_final_test:1.0.0
+          ports:
+            - containerPort: 9100
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: final-test-service
+  namespace: final-test-namespace
+spec:
+  selector:
+    app: final-test
+  ports:
+    - name: http
+      port: 9110
+      targetPort: 9100
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  namespace: final-test-namespace
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: final-test
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: final-test-service
+                port:
+                  number: 10000
