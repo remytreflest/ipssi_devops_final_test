@@ -1,0 +1,35 @@
+name: continuous-integration-workflow
+run-name: continuous integration run
+
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - development # target branch from pull request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configuration Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Installation des dépendances
+        run: npm install ci
+
+      - name: Lancement de Redis
+        run: docker-compose up -d
+
+      - name: Lancement des tests
+        run: npm test
