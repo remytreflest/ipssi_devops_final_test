@@ -1,6 +1,15 @@
 const db = require('../dbClient')
 
 module.exports = {
+
+  /**
+   * Permit to create an user
+   *
+   * @param   username  The username of the user.
+   * @param   firstname  The firstname of the user.
+   * @param   lastname  The lastname of the user.
+   * @returns The created user in case of success or an error message.
+   */
   async create({ username, firstname, lastname }) {
 
     if(!username)
@@ -22,6 +31,13 @@ module.exports = {
 
     return newUser;
   },
+
+  /**
+   * Permit to found an user
+   *
+   * @param   username  The username of the user.
+   * @returns The user in case of success or an not found message.
+   */
   async get(username) {
 
     const user = await db.hGetAll(username);
