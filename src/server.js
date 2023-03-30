@@ -5,6 +5,13 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = process.env.PORT || 3000
 
+// Mise en place du swagger
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require("swagger-jsdoc");
+const options = require("./swagger_options");
+const specs = swaggerJsdoc(options.options);
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
+
 const db = require('./dbClient')
 db.on("error", (err) => {
   console.error(err)
