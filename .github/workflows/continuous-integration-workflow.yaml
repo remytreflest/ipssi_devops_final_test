@@ -6,7 +6,7 @@ on:
     types:
       - opened
     branches:
-      - develop # target branch from pull request
+      - development # target branch from pull request
 
 jobs:
   test:
