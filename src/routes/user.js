@@ -108,7 +108,6 @@ const userRouter = express.Router()
  *         description: An unexpected error occurred
  *
  */
-
 userRouter
   .post('/', async (req, res) => {
     
@@ -138,7 +137,7 @@ userRouter
       })
 
     }
-  })
+  })  
   .post('/random/:numberOfUsersToCreate', async (req, res) => {
     try {
       const { numberOfUsersToCreate } = req.params;
@@ -159,20 +158,21 @@ userRouter
     }
   })
   .get('/:username', async (req, res) => {
-
     try {
 
       const { username } = req.params;
 
+      // retrieve the user
       const data = await userController.get(username);
 
+      // on success, return it to the client
       res.status(200).json({
         status: "success",
         msg: data
       })
 
     } catch (err) {
-
+      // on error, return an error response to the client
       res.status(404).json({
         status: "error",
         msg: err.message

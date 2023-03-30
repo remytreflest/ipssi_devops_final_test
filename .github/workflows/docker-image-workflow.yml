@@ -1,0 +1,28 @@
+name: continuous-integration-workflow
+run-name: docker image run
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Docker login
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Build the docker image
+        run: docker build -f Dockerfile -t remytr/ipssi_devops_final_test:latest .
+      - name: Docker Push
+        run: docker push ${{secrets.DOCKER_USER}}/ipssi_devops_final_test
+

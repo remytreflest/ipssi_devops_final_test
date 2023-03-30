@@ -1,3 +1,7 @@
+/**
+ * Test Class for all use cases from the user controller
+ */
+
 const { expect } = require('chai')
 const userController = require('../src/controllers/user')
 const db = require('../src/dbClient')

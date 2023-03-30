@@ -1,7 +1,11 @@
+/**
+ * This controller is used perform request about users<br>
+ * Like create or fetch a user
+ */
+
 const db = require('../dbClient')
 
 module.exports = {
-
   /**
    * Permit to create a user
    *
@@ -104,13 +108,11 @@ module.exports = {
   },
 
   /**
-   * Permit to found an user
-   *
-   * @param   username  The username of the user.
-   * @returns The user in case of success or an not found message.
-   */
+   * Fetch the user object matching the given username from the Redis database<br>
+   * The result contains all related fields to this user
+   * @param username The identifier used to retrieve the searched user
+   * @returns The user in case of success or a not found message.   */
   async get(username) {
-
     const user = await db.hGetAll(username);
 
     return user;
