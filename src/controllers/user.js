@@ -3,7 +3,7 @@ const db = require('../dbClient')
 module.exports = {
 
   /**
-   * Permit to create an user
+   * Permit to create a user
    *
    * @param   username  The username of the user.
    * @param   firstname  The firstname of the user.
@@ -15,7 +15,7 @@ module.exports = {
     if(!username)
       throw new Error("Wrong user parameters");
 
-    const existedUser = db.hGetAll(usernameToVerify);
+    const existedUser = db.hGetAll(username);
     let userAlreadyExists = !!(existedUser !== undefined && Object.keys(existedUser).length);
 
     if (userAlreadyExists) {
@@ -31,7 +31,11 @@ module.exports = {
 
     return newUser;
   },
-
+  /**
+   * Permit to create a bunch of random users
+   * @param numberOfUsersToCreate The number of users to generate
+   * @returns void
+   */
   async createRandom({ numberOfUsersToCreate }) {
     if (!numberOfUsersToCreate) {
       throw new Error("Must fill the numberOfUsersToCreate parameter");

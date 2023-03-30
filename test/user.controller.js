@@ -1,6 +1,7 @@
 const { expect } = require('chai')
 const userController = require('../src/controllers/user')
 const db = require('../src/dbClient')
+const describe = require("mocha").describe;
 
 describe('User', () => {
   
@@ -52,6 +53,50 @@ describe('User', () => {
       }
     })
   })
+
+  describe('Test for the "CreateRandom" users API endpoint', () => {
+    // no number of users to create param, then throw Error
+    it('no given parameter should throw error', async () => {
+      try {
+        await userController.createRandom("");
+      } catch (err) {
+        expect(err).to.not.be.equal(null);
+        expect(err.message).to.be.equal("Must fill the numberOfUsersToCreate parameter");
+      }
+    });
+
+    // Nan users to create param, then throw Error
+    it('given parameter is not a number, then thorw error', async () => {
+      try {
+        await userController.createRandom({numberOfUsersToCreate: "NotANumber"});
+      } catch (err) {
+        expect(err).to.not.be.equal(null);
+        expect(err.message).to.be.equal("The numberOfUsersToCreate parameter must be a positive integer");
+      }
+    });
+
+    // Negative users to create param, then throw Error
+    it('negative parameter should throw error', async () => {
+      try {
+        await userController.createRandom({numberOfUsersToCreate: -45});
+      } catch (err) {
+        expect(err).to.not.be.equal(null);
+        expect(err.message).to.be.equal("The numberOfUsersToCreate parameter must be a positive integer");
+      }
+    });
+
+    // Given good param, then create users
+    it('good parameters should create users', async () => {
+      try {
+        // perform query
+        await userController.createRandom({numberOfUsersToCreate: 5});
+
+        // todo: (didn't find how to) check if database has been populated
+      } catch (error) {
+        fail("This test must not throw error")
+      }
+    });
+  });
 
   // TODO Create test for the get method
   describe('Get', ()=> {
