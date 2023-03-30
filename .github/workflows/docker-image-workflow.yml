@@ -22,7 +22,7 @@ jobs:
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: Build the docker image
-        run: docker build . --file Dockerfile --tag remytr/ipssi_devops_final_test:$(date +%s)
+        run: docker build -f Dockerfile -t remytr/ipssi_devops_final_test:latest .
       - name: Docker Push
         run: docker push ${{secrets.DOCKER_USER}}/ipssi_devops_final_test
 
