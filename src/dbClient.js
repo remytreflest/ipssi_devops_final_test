@@ -1,7 +1,11 @@
-var redis = require("redis");
+let redis = require("redis");
 const { REDIS_PORT, REDIS_HOST } = require("./env");
 
-var db = redis.createClient({
+/**
+ * Client used to communicate with the Redis database
+ * @type {RedisClientType<RedisDefaultModules & RedisModules, RedisFunctions, RedisScripts>}
+ */
+let db = redis.createClient({
   host: REDIS_HOST,
   port: REDIS_PORT,
   retry_strategy: () => {
@@ -9,8 +13,10 @@ var db = redis.createClient({
   }
 });
 
-db.connect();
+// Connect to the database
+db.connect().then(r => console.log("Connected to REDIS database"));
 
+// When an administrator exit the terminal, disconnect from db
 process.on('SIGINT', function() {
   db.quit();
 });
