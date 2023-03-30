@@ -85,6 +85,30 @@ const userRouter = express.Router()
  *
  */
 
+/**
+ * @swagger
+ * tags:
+ *   name: User
+ *   description: The Users managing API
+ * /user/random/{numberOfUsersToGenerate}:
+ *   post:
+ *     summary: Create the given number of random users & save them in database
+ *     tags: [User]
+ *     parameters:
+ *       - in: path
+ *         name: numberOfUsersToGenerate
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The number of users to generate
+ *     responses:
+ *       201:
+ *         description: Users have been created !
+ *       404:
+ *         description: An unexpected error occurred
+ *
+ */
+
 userRouter
   .post('/', async (req, res) => {
     
