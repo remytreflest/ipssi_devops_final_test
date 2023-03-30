@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Installation des dépendances
-        run: npm install
+        run: npm install ci
 
       - name: Lancement de Redis
         run: docker-compose up -d
