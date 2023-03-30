@@ -2,9 +2,9 @@
   "name": "ece-userapi",
   "version": "1.0.0",
   "description": "User API web application",
-  "main": "src/index.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node src/server.js",
     "test": "mocha test/*.js"
   },
   "author": "Sergei Kudinov",

@@ -2,7 +2,7 @@ const db = require('../dbClient')
 
 module.exports = {
   async create({ username, firstname, lastname }) {
-    // Check parameters
+
     if(!username)
       throw new Error("Wrong user parameters");
 
@@ -23,11 +23,7 @@ module.exports = {
     return newUser;
   },
   async get(username) {
-    // TODO create this method
-    // db.hmget(username, ["firstname", "lastname"], (err, res) => {
-    //   if (err) return callback(err, null)
-    //   callback(null, res) // Return callback
-    // })
+
     const user = await db.hGetAll(username);
 
     return user;
