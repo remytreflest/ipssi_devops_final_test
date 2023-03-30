@@ -84,7 +84,6 @@ const userRouter = express.Router()
  *         description: The User was not found
  *
  */
-
 userRouter
   .post('/', async (req, res) => {
     
@@ -115,21 +114,29 @@ userRouter
 
     }
   })
-  .get('/:username', async (req, res) => {
-
+    /**
+     * REST Endpoint to retrieve a user from its username
+     * PROTOCOL : HTTP
+     * METHOD : GET
+     * PARAMETERS :
+     *  - username : string | The username of the user to retrieve
+     */
+  .get('/:username', async (req, res) => { // Express URL params - https://expressjs.com/en/guide/routing.html
     try {
 
       const { username } = req.params;
 
+      // retrieve the user
       const data = await userController.get(username);
 
+      // on success, return it to the client
       res.status(200).json({
         status: "success",
         msg: data
       })
 
     } catch (err) {
-
+      // on error, return an error response to the client
       res.status(404).json({
         status: "error",
         msg: err.message
