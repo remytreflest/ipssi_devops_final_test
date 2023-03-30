@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: final-test-container
-          image: remytreflest/ipssi_devops_final_test:1.0.0
+          image: remytr/ipssi_devops_final_test:latest
           ports:
             - containerPort: 9100
 ---
