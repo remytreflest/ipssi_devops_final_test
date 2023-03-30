@@ -115,6 +115,25 @@ userRouter
 
     }
   })
+  .post('/random/:numberOfUsersToCreate', async (req, res) => {
+    try {
+      const { numberOfUsersToCreate } = req.params;
+      // Create random users
+      await userController.createRandom({ numberOfUsersToCreate });
+
+      // on success, then return success response
+      res.status(201).json({
+        status: "success",
+        msg: "Users have been created !"
+      });
+    } catch (err) {
+      // on error, then return error response
+      res.status(400).json({
+        status: "error",
+        msg: err.message
+      })
+    }
+  })
   .get('/:username', async (req, res) => {
 
     try {
