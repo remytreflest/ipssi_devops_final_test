@@ -1,4 +1,3 @@
-
 const express = require('express')
 const userController = require('../controllers/user')
 
@@ -109,77 +108,77 @@ const userRouter = express.Router()
  *
  */
 userRouter
-  .post('/', async (req, res) => {
-    
-    try {
+    .post('/', async (req, res) => {
 
-      const { username, firstname, lastname } = req.body;
+        try {
 
-      console.log(username, firstname, lastname);
+            const {username, firstname, lastname} = req.body;
 
-      const user = await userController.create({
-        username,
-        firstname,
-        lastname
-      });
+            console.log(username, firstname, lastname);
 
-      res.status(201).json({
-        status: "success",
-        msg: user
-      });
+            const user = await userController.create({
+                username,
+                firstname,
+                lastname
+            });
 
-    } catch (err) {
+            res.status(201).json({
+                status: "success",
+                msg: user
+            });
 
-      res.status(400).json({
-        status: "error",
-        msg: err.message
+        } catch (err) {
 
-      })
+            res.status(400).json({
+                status: "error",
+                msg: err.message
 
-    }
-  })  
-  .post('/random/:numberOfUsersToCreate', async (req, res) => {
-    try {
-      const { numberOfUsersToCreate } = req.params;
-      // Create random users
-      await userController.createRandom({ numberOfUsersToCreate });
+            })
 
-      // on success, then return success response
-      res.status(201).json({
-        status: "success",
-        msg: "Users have been created !"
-      });
-    } catch (err) {
-      // on error, then return error response
-      res.status(400).json({
-        status: "error",
-        msg: err.message
-      })
-    }
-  })
-  .get('/:username', async (req, res) => {
-    try {
+        }
+    })
+    .post('/random/:numberOfUsersToCreate', async (req, res) => {
+        try {
+            const {numberOfUsersToCreate} = req.params;
+            // Create random users
+            await userController.createRandom({numberOfUsersToCreate});
 
-      const { username } = req.params;
+            // on success, then return success response
+            res.status(201).json({
+                status: "success",
+                msg: "Users have been created !"
+            });
+        } catch (err) {
+            // on error, then return error response
+            res.status(400).json({
+                status: "error",
+                msg: err.message
+            })
+        }
+    })
+    .get('/:username', async (req, res) => {
+        try {
 
-      // retrieve the user
-      const data = await userController.get(username);
+            const {username} = req.params;
 
-      // on success, return it to the client
-      res.status(200).json({
-        status: "success",
-        msg: data
-      })
+            // retrieve the user
+            const data = await userController.get(username);
 
-    } catch (err) {
-      // on error, return an error response to the client
-      res.status(404).json({
-        status: "error",
-        msg: err.message
-      })
+            // on success, return it to the client
+            res.status(200).json({
+                status: "success",
+                msg: data
+            })
 
-    }
+        } catch (err) {
+            // on error, return an error response to the client
+            res.status(404).json({
+                status: "error",
+                msg: err.message
+            })
 
-  })
-  
+        }
+
+    })
+
 module.exports = userRouter

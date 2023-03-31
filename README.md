@@ -40,14 +40,21 @@
 [^6]: *Déploie l'application dans une stack Docker*
 
 ## 🎮 Fonctionnalités
+
 ### Insertion d'un utilisateur
+
 Permet d'insérer un utilisateur dans la base de données Redis
+
 ### Récupération d'un utilisateur
+
 Permet de visualiser un utilisateur par rapport à son identifiant
+
 ### Insertions de plusieurs utilisateurs générés aléatoirement
+
 Permet d'insérer des utilisateurs générés aléatoirement dans la base de données Redis
 
 ## 👦🏻 Authors
+
 **remytreflest : https://github.com/remytreflest**
 
 **CorentinMaille : https://github.com/CorentinMaille**
