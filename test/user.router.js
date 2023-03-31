@@ -1,4 +1,4 @@
-const app = require('../src/server')
+const app = require('../src/index')
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 const db = require('../src/dbClient')
