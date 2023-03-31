@@ -3,10 +3,10 @@ version: '3'
 services:
   web:
     container_name: ipssi_devops
-    # image: remytr/ipssi_devops_final_test:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: remytr/ipssi_devops_final_test:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     ports:
       - 8080:3000
     environment:
@@ -20,7 +20,7 @@ services:
     # volumes:
     #   - db_redis:/usr/local/etc/redis
     restart: always
-    ports: 
+    ports:
       - 6379:6379
     #networks:
     #  - backend
