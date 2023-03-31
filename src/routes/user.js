@@ -114,8 +114,6 @@ userRouter
 
             const {username, firstname, lastname} = req.body;
 
-            console.log(username, firstname, lastname);
-
             const user = await userController.create({
                 username,
                 firstname,

@@ -90,8 +90,6 @@ module.exports = {
                     randomUser = generateRandomUser();
                 }
 
-                console.log(randomUser);
-
                 // Then insert it in db
                 await db.hSet(randomUser.username, {
                     firstname: randomUser.firstname,
