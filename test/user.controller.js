@@ -102,33 +102,31 @@ describe('User', () => {
         });
     });
 
-    // TODO Create test for the get method
     describe('Get', () => {
 
-        // it('get a user by username', (done) => {
-        //   // 1. First, create a user to make this unit test independent from the others
-        //   // 2. Then, check if the result of the get method is correct
-        //   const user = {
-        //     username: 'sergkudinov',
-        //     firstname: 'Sergei',
-        //     lastname: 'Kudinov'
-        //   }
-        //   userController.create(user);
-        //   let datas = userController.get(user.username);
-        //   expect(datas).to.not.be.equal(null);
-        //   done()
-        // })
+        it('get a user by username', async () => {
+          const user = {
+            username: 'sergkudinov',
+            firstname: 'Sergei',
+            lastname: 'Kudinov'
+          }
+          await userController.create(user);
+          const userGet = userController.get(user.username);
+          expect(userGet).to.not.be.equal(null);
+        })
 
-        // it('cannot get a user when it does not exist', (done) => {
-        //   // Chech with any invalid user
-        //   const user = {
-        //     username: 'popipo',
-        //     firstname: 'popipo',
-        //     lastname: 'popipo'
-        //   }
-        //   expect(userController.get(user.username)).to.be.equal(null);
-        //   done()
-        // })
+        it('cannot get a user when it does not exist', async () => {
+          const user = {
+            username: 'popipo',
+            firstname: 'popipo',
+            lastname: 'popipo'
+          }
+          try {
+              const userGet = await userController.get(user.username);
+          } catch (err){
+            expect(err).to.not.be.equal(null);
+          }
+        })
 
     })
 })
