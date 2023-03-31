@@ -7,6 +7,9 @@ on:
       - opened
     branches:
       - development # target branch from pull request
+  push:
+    branches:
+      - development
 
 jobs:
   test:

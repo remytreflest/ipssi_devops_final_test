@@ -84,6 +84,30 @@ const userRouter = express.Router()
  *         description: The User was not found
  *
  */
+
+/**
+ * @swagger
+ * tags:
+ *   name: User
+ *   description: The Users managing API
+ * /user/random/{numberOfUsersToGenerate}:
+ *   post:
+ *     summary: Create the given number of random users & save them in database
+ *     tags: [User]
+ *     parameters:
+ *       - in: path
+ *         name: numberOfUsersToGenerate
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The number of users to generate
+ *     responses:
+ *       201:
+ *         description: Users have been created !
+ *       404:
+ *         description: An unexpected error occurred
+ *
+ */
 userRouter
   .post('/', async (req, res) => {
     
@@ -113,15 +137,27 @@ userRouter
       })
 
     }
+  })  
+  .post('/random/:numberOfUsersToCreate', async (req, res) => {
+    try {
+      const { numberOfUsersToCreate } = req.params;
+      // Create random users
+      await userController.createRandom({ numberOfUsersToCreate });
+
+      // on success, then return success response
+      res.status(201).json({
+        status: "success",
+        msg: "Users have been created !"
+      });
+    } catch (err) {
+      // on error, then return error response
+      res.status(400).json({
+        status: "error",
+        msg: err.message
+      })
+    }
   })
-    /**
-     * REST Endpoint to retrieve a user from its username
-     * PROTOCOL : HTTP
-     * METHOD : GET
-     * PARAMETERS :
-     *  - username : string | The username of the user to retrieve
-     */
-  .get('/:username', async (req, res) => { // Express URL params - https://expressjs.com/en/guide/routing.html
+  .get('/:username', async (req, res) => {
     try {
 
       const { username } = req.params;
