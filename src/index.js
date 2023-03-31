@@ -15,17 +15,17 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require("swagger-jsdoc");
 const options = require("./swagger_options");
 const specs = swaggerJsdoc(options.options);
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs, {explorer: true}));
 
 const db = require('./dbClient')
 // Log redis database errors
 db.on("error", (err) => {
-  console.error(err)
+    console.error(err)
 })
 
 // Parse incoming HTTP requests to a usable request object
 app.use(bodyParser.urlencoded({
-  extended: false
+    extended: false
 }))
 app.use(bodyParser.json())
 
@@ -36,8 +36,8 @@ app.use('/user', userRouter)
 
 // Tell the server to listen to inbound requests from the configured port
 const server = app.listen(port, (err) => {
-  if (err) throw err
-  console.log("Server listening the port " + port)
+    if (err) throw err
+    console.log("Server listening the port " + port)
 })
 
 module.exports = server

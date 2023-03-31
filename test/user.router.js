@@ -10,15 +10,15 @@ const {response} = require("express");
 chai.use(chaiHttp)
 
 describe('User REST API', () => {
-  
+
     beforeEach(() => {
-      // Clean DB before each test
-      db.flushDb()
+        // Clean DB before each test
+        db.flushDb()
     })
-    
+
     after(() => {
-      app.close()
-      db.quit()
+        app.close()
+        db.quit()
     })
 
     describe('POST /user', () => {
@@ -59,7 +59,7 @@ describe('User REST API', () => {
                     done()
                 })
                 .catch((err) => {
-                   throw err
+                    throw err
                 })
         })
     })
@@ -117,7 +117,7 @@ describe('User REST API', () => {
         });
     });
 
-    describe('GET /user', ()=> {
-    // TODO Create test for the get method
+    describe('GET /user', () => {
+        // TODO Create test for the get method
     })
 })

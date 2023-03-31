@@ -20,7 +20,7 @@ services:
     # volumes:
     #   - db_redis:/usr/local/etc/redis
     restart: always
-    ports: 
+    ports:
       - 6379:6379
     #networks:
     #  - backend
